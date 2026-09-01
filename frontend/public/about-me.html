@@ -152,10 +152,217 @@
         padding: 16px;
         color: #555;
       }
+
+      .top-actions {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        z-index: 100;
+        display: flex;
+        gap: 10px;
+      }
+
+      .top-actions button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #4f6ef7;
+        background-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(8px);
+        transition: transform 0.2s ease, background-color 0.2s ease;
+      }
+
+      .top-actions button:hover {
+        transform: translateY(-2px);
+      }
+
+      /* 暗色模式：切换后改变多处 CSS */
+      body.dark {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        color: #e5e7eb;
+      }
+
+      body.dark .card {
+        background-color: rgba(15, 23, 42, 0.55);
+      }
+
+      body.dark h2 {
+        color: #f1f5f9;
+      }
+
+      body.dark #profile .subtitle,
+      body.dark .contact-table th,
+      body.dark footer {
+        color: #94a3b8;
+      }
+
+      body.dark .tag-list li {
+        background-color: rgba(96, 165, 250, 0.25);
+        color: #bfdbfe;
+      }
+
+      body.dark .contact-table a,
+      body.dark .back-link,
+      body.dark .top-actions button {
+        color: #93c5fd;
+      }
+
+      body.dark .back-link,
+      body.dark .top-actions button {
+        background-color: rgba(15, 23, 42, 0.55);
+      }
+
+      #github-card {
+        grid-column: 1 / -1;
+      }
+
+      .github-hint {
+        margin: 0 0 12px;
+        color: #555;
+        font-size: 13px;
+      }
+
+      .github-profile {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .github-head {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+      }
+
+      .github-avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .github-meta {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .github-name {
+        font-size: 20px;
+        font-weight: bold;
+        color: #2c3e50;
+        text-decoration: none;
+      }
+
+      .github-bio {
+        margin: 4px 0 8px;
+        color: #555;
+        font-size: 14px;
+      }
+
+      .github-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .github-stats span {
+        padding: 3px 10px;
+        border-radius: 999px;
+        background-color: rgba(79, 110, 247, 0.12);
+        color: #3b5bdb;
+        font-size: 13px;
+      }
+
+      .github-loading {
+        color: #555;
+        font-size: 14px;
+      }
+
+      .repo-list {
+        list-style: none;
+        margin: 16px 0 0;
+        padding: 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      .repo-item {
+        padding: 12px 4px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      .repo-name {
+        font-weight: 600;
+        color: #4f6ef7;
+        text-decoration: none;
+      }
+
+      .repo-desc {
+        display: block;
+        margin: 4px 0 6px;
+        color: #555;
+        font-size: 13px;
+      }
+
+      .repo-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        color: #555;
+        font-size: 12px;
+      }
+
+      .repo-lang {
+        color: #3b5bdb;
+      }
+
+      .repo-empty {
+        padding: 12px 4px;
+        color: #555;
+        font-size: 13px;
+      }
+
+      body.dark .github-hint,
+      body.dark .github-bio,
+      body.dark .github-stats,
+      body.dark .github-loading,
+      body.dark .repo-desc,
+      body.dark .repo-meta,
+      body.dark .repo-empty {
+        color: #94a3b8;
+      }
+
+      body.dark .github-name {
+        color: #f1f5f9;
+      }
+
+      body.dark .github-stats span {
+        background-color: rgba(96, 165, 250, 0.25);
+        color: #bfdbfe;
+      }
+
+      body.dark .repo-name,
+      body.dark .repo-lang {
+        color: #93c5fd;
+      }
+
+      body.dark .repo-list {
+        border-top-color: rgba(255, 255, 255, 0.08);
+      }
+
+      body.dark .repo-item {
+        border-bottom-color: rgba(255, 255, 255, 0.08);
+      }
     </style>
   </head>
   <body>
-    <a class="back-link" href="./index.html">&larr; 返回首页</a>
+    <a class="back-link" href="./index.html" data-i18n="backHome">&larr; 返回首页</a>
+    <div class="top-actions">
+      <button id="language-toggle" type="button" aria-label="切换语言">EN</button>
+      <button id="theme-toggle" type="button" aria-label="切换主题">🌙 暗色模式</button>
+    </div>
     <div id="about-me-frame">
       <div class="card" id="profile">
         <div id="avatar">hyx</div>
@@ -164,8 +371,8 @@
       </div>
 
       <div class="card">
-        <h2>关于我</h2>
-        <p>
+        <h2 data-i18n="aboutMe">关于我</h2>
+        <p data-i18n="aboutMeText">
           大家好，我是 <strong>hyx</strong>，一名电子系的在校学生。目前正在学习暑期培养课程。
           
         </p>
@@ -173,7 +380,7 @@
       </div>
 
       <div class="card">
-        <h2>我的技能</h2>
+        <h2 data-i18n="skills">我的技能</h2>
         <ul class="tag-list">
           <li>HTML</li>
           <li>CSS</li >
@@ -181,50 +388,43 @@
       </div>
 
       <div class="card">
-        <h2>兴趣爱好</h2>
+        <h2 data-i18n="hobbies">兴趣爱好</h2>
         <ul class="hobby-list">
-          <li>听音乐、看电影</li>
-          <li>羽毛球、骑行、乒乓球</li>
-          <li>看游戏实况</li>
+          <li data-i18n="hobby1">听音乐、看电影</li>
+          <li data-i18n="hobby2">羽毛球、骑行、乒乓球</li>
+          <li data-i18n="hobby3">看游戏实况</li>
         </ul>
       </div>
 
       <div class="card">
-        <h2>联系方式</h2>
+        <h2 data-i18n="contact">联系方式</h2>
         <table class="contact-table">
           <tr>
-            <th>邮箱</th>
+            <th data-i18n="email">邮箱</th>
             <td><a href="mailto:huangyx25@mails.tsinghua.edu.cn">huangyx25@mails.tsinghua.edu.cn</a></td>
+          </tr>
+          <tr>
+            <th data-i18n="bilibili">B站主页</th>
+            <td><a href="https://space.bilibili.com/3546749541026559?spm_id_from=333.1007.0.0" target="_blank" rel="noopener">space.bilibili.com/3546749541026559</a></td>
           </tr>
           
           <tr>
-            <th>主页</th>
-            <td><a href="./index.html">返回项目首页</a></td>
+            <th data-i18n="homepage">主页</th>
+            <td><a href="./index.html" data-i18n="backProject">返回项目首页</a></td>
           </tr>
         </table>
       </div>
-    </div>
-    <footer>&copy; 2026 hyx &middot; 感谢访问</footer>
 
-    <script>
-      const greetingDOM = document.getElementById("greeting");
-      const hour = new Date().getHours();
-      let greeting;
-      if (hour < 6) {
-        greeting = "夜深了，注意休息哦";
-      } else if (hour < 9) {
-        greeting = "早上好，欢迎来到我的个人网页";
-      } else if (hour < 12) {
-        greeting = "上午好，欢迎来到我的个人网页";
-      } else if (hour < 14) {
-        greeting = "中午好，欢迎来到我的个人网页";
-      } else if (hour < 18) {
-        greeting = "下午好，欢迎来到我的个人网页";
-      } else {
-        greeting = "晚上好，欢迎来到我的个人网页";
-      }
-      greetingDOM.innerText = greeting;
-    </script>
+      <div class="card" id="github-card">
+        <h2 data-i18n="githubTitle">我的 GitHub</h2>
+        <p class="github-hint" data-i18n="githubHint">实时拉取公开仓库信息</p>
+        <div id="github-profile" class="github-profile"></div>
+        <ul id="github-repos" class="repo-list"></ul>
+      </div>
+    </div>
+    <footer data-i18n="footer">&copy; 2026 hyx &middot; 感谢访问</footer>
+
+    <script src="./about-me.js" defer></script>
   </body>
 </html>
 
