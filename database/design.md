@@ -84,5 +84,10 @@ _一般来说，一个实体对应一张表，多对多的关系也可对应一�
 |           | reply_to_id | uuid      |      | message.uuid |
 |           | content     | text      |      |             |
 |           | created_at  | timestamp |      |             |
+| note      | uuid        | uuid      | 是   |             |
+|           | room_uuid   | uuid      |      | room.uuid   |
+|           | content     | text      |      |             |
+|           | created_at  | timestamp |      |             |
+|           | updated_at  | timestamp |      |             |
 
 注：由于使用的是 PostgreSQL，其`text`类型指长度可变的字符串，与其他数据库可能不同（[PostgreSQL: Documentation: 16: Chapter 8. Data Types](https://www.postgresql.org/docs/current/datatype.html)）
